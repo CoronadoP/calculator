@@ -1,0 +1,102 @@
+body{
+    background-color: #b8e3ea;
+    font-family: 'Press Start 2P', cursive;
+}
+
+#calculator-body{
+    margin-top: 50px;
+    border: 5px solid black;
+    height: 650px;
+    width: 480px;
+    border-radius: 3%;
+    display: flex;
+    flex-direction: column;
+    background-color: #a9bcc6;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+#display {
+    background-color: #e7e4e3;
+    border: 5px solid black;
+    border-radius: 3%;
+    height: 50px;
+    width: 430px;
+    font-size: 50px;
+    text-align: right;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 5px;
+    margin-top: 10px;
+}
+
+#operations-body{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+}
+
+#operations-body > button{
+    height: 80px;
+    width: 95px;
+    border: 5px solid black;
+    border-radius: 10%;
+    font-size: 50px;
+    margin: 10px;
+    background-color: #c7aabc;
+}
+
+#values-and-enterbtn-body {
+    display: flex;
+    flex-direction: row;
+}
+
+#values-body{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#values-body > button {
+    height: 80px;
+    width: 95px;
+    border: 5px solid black;
+    border-radius: 10%;
+    font-size: 50px;
+    margin: 10px;
+    background-color: #eab354;
+
+}
+
+#enterbtn-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#enterbtn-body > button {
+    border: 5px solid black;
+    width: 95px;
+    
+}
+
+#enter {
+    height: 280px;
+    font-size: 50px;
+    margin: 0px 20px 3px 0px;
+    border-radius: 3%;
+    background-color: #c7aabc;
+}
+
+#clear {
+    height: 80px;
+    font-size: 20px;
+    margin: 15px 20px 0px 0px;
+    border-radius: 5%;
+    background-color: #5f787b;
+}
+
