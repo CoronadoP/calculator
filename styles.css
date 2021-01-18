@@ -1,10 +1,12 @@
 body{
     background-color: #b8e3ea;
-    font-family: 'Press Start 2P', cursive;
+    
 }
 
 #calculator-body{
     margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
     border: 5px solid black;
     height: 650px;
     width: 480px;
@@ -13,10 +15,15 @@ body{
     flex-direction: column;
     background-color: #a9bcc6;
     justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
+    font-family: 'Press Start 2P', cursive;
 
 }
+
+button {
+    outline: none;
+    box-shadow: none;
+}
+
 
 #display {
     background-color: #e7e4e3;
@@ -46,6 +53,10 @@ body{
     border-radius: 10%;
     font-size: 50px;
     margin: 10px;
+    background-color: #f2b9cc;
+}
+
+#operations-body > button:active {
     background-color: #c7aabc;
 }
 
@@ -72,6 +83,12 @@ body{
 
 }
 
+#values-body > button:active {
+    background-color: #f9de59;
+}
+
+
+
 #enterbtn-body{
     display: flex;
     flex-direction: column;
@@ -89,7 +106,11 @@ body{
     font-size: 50px;
     margin: 0px 20px 3px 0px;
     border-radius: 3%;
-    background-color: #c7aabc;
+    background-color: #ea57bb;
+}
+
+#enter:active {
+    background-color: #f799d9;
 }
 
 #clear {
@@ -97,6 +118,10 @@ body{
     font-size: 20px;
     margin: 15px 20px 0px 0px;
     border-radius: 5%;
-    background-color: #5f787b;
+    background-color: #e1dc6b;
+}
+
+#clear:active {
+    background-color: #a1ae25;
 }
 
