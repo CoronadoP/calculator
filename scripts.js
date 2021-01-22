@@ -1,8 +1,8 @@
 let displayValue = "";
 let operationSelected = "";
-let firstValue = "";
-let secondValue = "";
-let result = "";
+let firstValue = 0;
+let secondValue = 0;
+let result = 0;
 
 let display = document.querySelector('#display');
 
@@ -25,40 +25,37 @@ let operBtnsArr = Array.from(operBtns);
 valueBtnsArr.forEach((button) => {
     button.addEventListener('click', () => {
         displayValue += button.value;
-        display.textContent = displayValue;
-        if(operationSelected === ""){
-            firstValue = Number(displayValue);
-            console.log("first value: " + firstValue);
-        } else {
-            secondValue = Number(displayValue);
-            console.log("second value: " + secondValue);
-        }
+        display.textContent = checkForLeadingZero(displayValue); 
         
+        
+          
     });
 });
 
 //Take note of the operations the user wants to perform
 //Prevent the user from selecting an operation if first value has not been entered
+/*
 operBtnsArr.forEach((button) => {
     button.addEventListener('click', () => {
-        if(firstValue === ""){
+        if(firstValue === 0){
             alert("First enter a value, then an operation");
+            firstValue = 0;
         } else {
            displayValue = "";
             operationSelected = button.value;
             console.log(`Operation Selected: ${operationSelected}`); 
-        }
-        
-        
+        } 
     })
 });
+*/
+
 
 //Calculate the solution
+/*
 enter.addEventListener('click', function(){
 
     if(operationSelected !== ""){
-        result = operate(operationSelected, firstValue, secondValue);
-        result = Math.round((result + Number.EPSILON) * 100) / 100;
+        result = truncateAnswer(operate(operationSelected, firstValue, secondValue));
         console.log(`Performing operation: ${firstValue} ${operationSelected} ${secondValue} = ${result}`);
 
         displayValue = "";
@@ -68,12 +65,11 @@ enter.addEventListener('click', function(){
         secondValue = 0;
 
         operationSelected = "";
-    }
-    
-
-    
-    
+    }  
 });
+
+*/
+
 
 //Clear the numbers from the display
 clear.addEventListener('click', function(){
@@ -112,5 +108,19 @@ function operate(oper, a, b){
     } else if(oper === "/"){
         return divide (a, b);
     }
+}
+
+function truncateAnswer(answer){
+    return Math.round((answer + Number.EPSILON) * 100) / 100;
+}
+
+//If there is a leading zero in value to be displayed, get rid of it
+function checkForLeadingZero(val){
+    if(val.indexOf("0") == 0){
+        displayValue = "";
+        return "0";
+    }
+    return val;
+    
 }
 
