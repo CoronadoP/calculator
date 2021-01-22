@@ -15,7 +15,6 @@ body{
     flex-direction: column;
     background-color: #a9bcc6;
     justify-content: center;
-    font-family: 'Press Start 2P', cursive;
 
 }
 
@@ -26,17 +25,22 @@ button {
 
 
 #display {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     background-color: #e7e4e3;
     border: 5px solid black;
     border-radius: 3%;
-    height: 50px;
+    height: 40px;
     width: 430px;
-    font-size: 50px;
-    text-align: right;
-    margin-left: auto;
+    font-size: 60px;
+    height: 80px;
     margin-right: auto;
-    padding: 20px 5px;
+    margin-left: auto;
+    margin-bottom: 10px;
     margin-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 #operations-body{
