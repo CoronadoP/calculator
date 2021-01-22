@@ -27,6 +27,7 @@ valueBtnsArr.forEach((button) => {
         displayValue += button.value;
         display.textContent = checkForLeadingZero(displayValue); 
         
+        //work on firstvalue/secondvalue
         
           
     });
