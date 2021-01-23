@@ -26,8 +26,17 @@ let operBtnsArr = Array.from(operBtns);
 //Display number when a value button is placed
 valueBtnsArr.forEach((button) => {
     button.addEventListener('click', () => {
-        displayValue += button.value;
-        display.textContent = checkForLeadingZero(displayValue);        
+
+        //prevent user from entering more than one decimal point or as first input
+        if(button.value == "." && displayValue == ""){
+            display.textContent = 0; 
+        } else if (button.value == "." && displayValue.includes(".")){
+            display.textContent = checkForLeadingZero(displayValue);
+        }else {
+            displayValue += button.value;
+            display.textContent = checkForLeadingZero(displayValue);
+        }
+               
           
     });
 });
@@ -61,8 +70,11 @@ valueBtnsArr.forEach((button) => {
 
 operBtnsArr.forEach((button) => {
     button.addEventListener('click', () => {
-
-        if(secondValue != "0"){
+        
+        if(button.value == "/" && secondValue === 0){
+            displayValue = "";
+            display.textContent = "lmao";
+        } else if (secondValue != "0"){
             result = truncateAnswer(operate(operationSelected, firstValue, secondValue));
 
             console.log(`Performing Calc: ${firstValue} ${operationSelected} ${secondValue} = ${result}`);
@@ -71,15 +83,13 @@ operBtnsArr.forEach((button) => {
             secondValue = "0";
 
             display.textContent = result.toString();
-
-            
         }
 
         displayValue = "";
         operationSelected = button.value;
         console.log(`Op: ${operationSelected}`);
         
-    })
+    });
 });
 
 
@@ -89,12 +99,11 @@ operBtnsArr.forEach((button) => {
 enter.addEventListener('click', function(){
 
     //Check for division by 0
-    /*
-    if(secondValue == 0){
-        alert
-    }
-*/
-    if(operationSelected !== ""){
+    if(operationSelected == "/" && secondValue === 0) {
+        displayValue = "";
+        display.textContent = "lmao";
+
+    } else if (operationSelected !== "") {
         result = truncateAnswer(operate(operationSelected, firstValue, secondValue));
         console.log(`Performing Calc: ${firstValue} ${operationSelected} ${secondValue} = ${result}`);
 
@@ -105,7 +114,7 @@ enter.addEventListener('click', function(){
         secondValue = "0";
 
         operationSelected = "";
-    }  
+    } 
 });
 
 
@@ -117,8 +126,8 @@ clear.addEventListener('click', function(){
     display.textContent = "0";
     operationSelected = "";
     result = 0;
-    firstValue = 0;
-    secondValue = 0;
+    firstValue = "0";
+    secondValue = "0";
 });
 
 //Operations
@@ -139,6 +148,9 @@ function divide(a, b) {
 }
 
 function operate(oper, a, b){
+
+    //let answer = 0;
+
     if(oper === "+"){
         return add(a, b);
     } else if(oper === "-"){
@@ -148,10 +160,26 @@ function operate(oper, a, b){
     } else if(oper === "/"){
         return divide (a, b);
     }
+
+    //return truncateAnswer(answer)
 }
 
 function truncateAnswer(answer){
+
     return Math.round((answer + Number.EPSILON) * 100) / 100;
+
+    /*
+    let answerLength = String(answer).length;
+     if(answerLength <= 14){    
+         return answer;
+     } else if (answerLength > 14){
+         if(operationSelected == "")
+     }
+     */
+     
+    
+
+    
 }
 
 //If there is a leading zero in value to be displayed, get rid of it
