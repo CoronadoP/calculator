@@ -27,6 +27,7 @@ let operBtnsArr = Array.from(operBtns);
 valueBtnsArr.forEach((button) => {
     button.addEventListener('click', () => {
 
+        
         //prevent user from entering more than one decimal point or as first input
         if(button.value == "." && displayValue == ""){
             display.textContent = 0; 
@@ -35,7 +36,7 @@ valueBtnsArr.forEach((button) => {
         }else {
             displayValue += button.value;
             display.textContent = checkForLeadingZero(displayValue);
-        }
+        }   
                
           
     });
@@ -75,7 +76,7 @@ operBtnsArr.forEach((button) => {
             displayValue = "";
             display.textContent = "lmao";
         } else if (secondValue != "0"){
-            result = truncateAnswer(operate(operationSelected, firstValue, secondValue));
+            result = operate(operationSelected, firstValue, secondValue);
 
             console.log(`Performing Calc: ${firstValue} ${operationSelected} ${secondValue} = ${result}`);
 
@@ -104,7 +105,7 @@ enter.addEventListener('click', function(){
         display.textContent = "lmao";
 
     } else if (operationSelected !== "") {
-        result = truncateAnswer(operate(operationSelected, firstValue, secondValue));
+        result = operate(operationSelected, firstValue, secondValue);
         console.log(`Performing Calc: ${firstValue} ${operationSelected} ${secondValue} = ${result}`);
 
         displayValue = "";
@@ -149,33 +150,47 @@ function divide(a, b) {
 
 function operate(oper, a, b){
 
-    //let answer = 0;
+    let answer = 0;
 
     if(oper === "+"){
-        return add(a, b);
+        answer = add(a, b);
     } else if(oper === "-"){
-        return subtract(a, b);
+        answer = subtract(a, b);
     } else if(oper === "*"){
-        return multiply(a, b);
+        answer = multiply(a, b);
     } else if(oper === "/"){
-        return divide (a, b);
+        answer = divide (a, b);
     }
 
-    //return truncateAnswer(answer)
+    console.log(answer);
+    return truncateAnswer(oper, answer)
 }
 
-function truncateAnswer(answer){
-
-    return Math.round((answer + Number.EPSILON) * 100) / 100;
-
+function truncateAnswer(oper, answer){
     /*
+    return Math.round((answer + Number.EPSILON) * 100) / 100;
+    */
+    
+    let answerString = String(answer);
     let answerLength = String(answer).length;
+
+    //display original answer (no truncation) if less than 14 chars long
      if(answerLength <= 14){    
          return answer;
+
+    //perform truncation of answer if answer is greater than 14 chars long
      } else if (answerLength > 14){
-         if(operationSelected == "")
+         if(answerString.includes(".")){
+             let beforeDec = answerString.substring(0, answerString.indexOf("."));
+             let beforeDecLength = beforeDec.length;
+             let spaceLeft = 14 - beforeDecLength;
+             let afterDec = answerString.substring(beforeDecLength, beforeDecLength + spaceLeft);
+             let truncatedAnswer = beforeDec + afterDec;
+
+             return Number(truncatedAnswer);
+         }
      }
-     */
+
      
     
 
