@@ -1,7 +1,7 @@
 let displayValue = "";
 let operationSelected = "";
-let firstValue = 0;
-let secondValue = 0;
+let firstValue = "0";
+let secondValue = "0";
 let result = 0;
 
 let display = document.querySelector('#display');
@@ -11,7 +11,9 @@ let clear = document.querySelector('#clear');
 
 let valueBtns = document.querySelectorAll('div.values button');
 let valueBtnsArr = Array.from(valueBtns);
-valueBtnsArr = valueBtnsArr.splice(0, 10); //only get buttons 0-9
+valueBtnsArr = valueBtnsArr.splice(0, 11); //only get buttons 0-9 and decimal point
+
+let negBtn = document.querySelector('#neg');
 
 let operBtns = document.querySelectorAll('div#operations-body button');
 let operBtnsArr = Array.from(operBtns);
@@ -25,51 +27,88 @@ let operBtnsArr = Array.from(operBtns);
 valueBtnsArr.forEach((button) => {
     button.addEventListener('click', () => {
         displayValue += button.value;
-        display.textContent = checkForLeadingZero(displayValue); 
-        
-        //work on firstvalue/secondvalue
-        
+        display.textContent = checkForLeadingZero(displayValue);        
           
     });
 });
 
+//Turn value negative if not negative already, if it is negative then turn it back into a positive number
+negBtn.addEventListener('click', () => {
+    if(displayValue.includes("-")){
+        displayValue = String(0 - Number(displayValue));
+    } else {
+        displayValue = "-" + displayValue;
+    }
+    display.textContent = displayValue;
+});
+
+valueBtnsArr.forEach((button) => {
+    button.addEventListener('click', () => {
+        if(operationSelected == ""){
+            firstValue = Number(displayValue);
+
+            console.log(`first value: ${firstValue}`);
+        } else {
+            secondValue = Number(displayValue);
+
+            console.log(`second value: ${secondValue}`);
+        }
+    });
+});
+
 //Take note of the operations the user wants to perform
-//Prevent the user from selecting an operation if first value has not been entered
-/*
+//If a first and second value have been entered, and then an operation is selected, then calculator result and set it to first value. Second value becomes "0"
+
 operBtnsArr.forEach((button) => {
     button.addEventListener('click', () => {
-        if(firstValue === 0){
-            alert("First enter a value, then an operation");
-            firstValue = 0;
-        } else {
-           displayValue = "";
-            operationSelected = button.value;
-            console.log(`Operation Selected: ${operationSelected}`); 
-        } 
+
+        if(secondValue != "0"){
+            result = truncateAnswer(operate(operationSelected, firstValue, secondValue));
+
+            console.log(`Performing Calc: ${firstValue} ${operationSelected} ${secondValue} = ${result}`);
+
+            firstValue = result;
+            secondValue = "0";
+
+            display.textContent = result.toString();
+
+            
+        }
+
+        displayValue = "";
+        operationSelected = button.value;
+        console.log(`Op: ${operationSelected}`);
+        
     })
 });
-*/
+
 
 
 //Calculate the solution
-/*
+
 enter.addEventListener('click', function(){
 
+    //Check for division by 0
+    /*
+    if(secondValue == 0){
+        alert
+    }
+*/
     if(operationSelected !== ""){
         result = truncateAnswer(operate(operationSelected, firstValue, secondValue));
-        console.log(`Performing operation: ${firstValue} ${operationSelected} ${secondValue} = ${result}`);
+        console.log(`Performing Calc: ${firstValue} ${operationSelected} ${secondValue} = ${result}`);
 
         displayValue = "";
         display.textContent = result.toString();
 
         firstValue = result;
-        secondValue = 0;
+        secondValue = "0";
 
         operationSelected = "";
     }  
 });
 
-*/
+
 
 
 //Clear the numbers from the display
